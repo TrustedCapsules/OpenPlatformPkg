@@ -144,7 +144,11 @@
   ReportStatusCodeLib|IntelFrameworkModulePkg/Library/DxeReportStatusCodeLibFramework/DxeReportStatusCodeLib.inf
 
 [BuildOptions]
+!ifdef HIKEY_TZRAM_64MB
+  GCC:*_*_*_PLATFORM_FLAGS = -I$(WORKSPACE)/OpenPlatformPkg/Chips/Hisilicon/Hi6220/Include -I$(WORKSPACE)/OpenPlatformPkg/Platforms/Hisilicon/HiKey/Include -I$(WORKSPACE)/OpenPlat    formPkg/Include -DHIKEY_TZRAM_64MB
+!else
   GCC:*_*_*_PLATFORM_FLAGS == -I$(WORKSPACE)/MdeModulePkg/Include -I$(WORKSPACE)/OpenPlatformPkg/Include -I$(WORKSPACE)/OpenPlatformPkg/Chips/Hisilicon/Hi6220/Include -I$(WORKSPACE)/OpenPlatformPkg/Platforms/Hisilicon/HiKey/Include
+!endif
 
 [BuildOptions.common.EDKII.DXE_RUNTIME_DRIVER]
   GCC:*_*_ARM_DLINK_FLAGS = -z common-page-size=0x1000
@@ -277,7 +281,11 @@
 
   # System Memory (1GB)
   gArmTokenSpaceGuid.PcdSystemMemoryBase|0x00000000
+!ifdef HIKEY_TZRAM_64MB
+  gArmTokenSpaceGuid.PcdSystemMemorySize|0x3B000000
+!else
   gArmTokenSpaceGuid.PcdSystemMemorySize|0x3E000000
+!endif
 
   # HiKey Dual-Cluster profile
   gArmPlatformTokenSpaceGuid.PcdCoreCount|8

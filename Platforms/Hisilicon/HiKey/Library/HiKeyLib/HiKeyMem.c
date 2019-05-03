@@ -41,7 +41,11 @@ STATIC struct HiKeyReservedMemory {
   { 0x06DFF000, 0x00001000 },    // MAILBOX
   { 0x0740F000, 0x00001000 },    // MAILBOX
   { 0x21F00000, 0x00100000 },    // PSTORE/RAMOOPS
+#ifdef HIKEY_TZRAM_64MB
+  { 0x3B000000, 0x05000000 }     // TEE OS
+#else
   { 0x3E000000, 0x02000000 }     // TEE OS
+#endif
 };
 
 STATIC
